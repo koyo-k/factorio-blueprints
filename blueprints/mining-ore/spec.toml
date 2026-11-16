@@ -1,0 +1,3 @@
+# Mining cannot be measured by `fbp sim`: the test map has no ore under the drills.
+# No [[target]]: this blueprint is static-validation only (fbp build).
+# Game-data figure (not measured): 12 drills x 0.5 ore/s = 360 ore/min at mining productivity 0.

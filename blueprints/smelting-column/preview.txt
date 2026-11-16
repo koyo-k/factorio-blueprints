@@ -1,0 +1,20 @@
+# Smelting column
+# x = -1..48, y = -1..7 (tile coordinates; north is up)
+    0         1         2         3         4        
+   10123456789012345678901234567890123456789012345678
+-1 ..................................................
+ 0 .→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→.
+ 1 .→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→.
+ 2 .▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽.
+ 3 .AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.
+ 4 .AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.
+ 5 .▼.▼+▼.▼.▼+▼.▼.▼+▼.▼.▼+▼.▼.▼+▼.▼.▼+▼.▼.▼+▼.▼.▼+▼..
+ 6 .→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→.
+ 7 ..................................................
+
+legend: (! = overlapping entities)
+  → belt (arrow = travel direction)
+  ▼ inserter, arrow = the way items move (reach 1)
+  ▽ inserter, arrow = the way items move (reach 2)
+  + electric-pole
+  A stone-furnace  2x2  x24

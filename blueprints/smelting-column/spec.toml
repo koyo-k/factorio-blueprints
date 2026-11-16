@@ -1,0 +1,27 @@
+# Iron is measured here. Measured 2026-11-16 (Factorio 2.1.24, no research bonus):
+#   iron ore -> 450.0 iron-plate/min, copper ore -> 450.0 copper-plate/min (33 coal/min),
+#   stone -> 446.25 stone-brick/min (eats 900 stone/min = a full belt; 31.5 coal/min).
+# Positions are blueprint TILE coordinates (same as preview.txt).
+
+[[target]]
+item = "iron-plate"
+per_minute = 440
+tolerance = 0.05
+
+[sim]
+warmup_ticks = 3600
+measure_ticks = 14400
+
+[[sim.input]]
+kind = "belt"
+position = [0, 0]       # coal belt
+item = "coal"
+
+[[sim.input]]
+kind = "belt"
+position = [0, 1]       # ore belt
+item = "iron-ore"
+
+[[sim.output]]
+kind = "belt"
+position = [47, 6]      # east end of the plate belt

@@ -1,0 +1,18 @@
+# Ore mining
+# x = -1..21, y = -1..7 (tile coordinates; north is up)
+    0         1         2 
+   10123456789012345678901
+-1 .......................
+ 0 .AAA.AAAAAA.AAAAAA.AAA.
+ 1 .AAA+AAAAAA+AAAAAA+AAA.
+ 2 .AAA.AAAAAA.AAAAAA.AAA.
+ 3 .→→→→→→→→→→→→→→→→→→→→→.
+ 4 .AAA.AAAAAA.AAAAAA.AAA.
+ 5 .AAA+AAAAAA+AAAAAA+AAA.
+ 6 .AAA.AAAAAA.AAAAAA.AAA.
+ 7 .......................
+
+legend: (! = overlapping entities)
+  → belt (arrow = travel direction)
+  + electric-pole
+  A electric-mining-drill  3x3  x12

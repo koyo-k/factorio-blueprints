@@ -126,7 +126,7 @@ def test_render_shows_item_flow():
     assert "→→→" in art and "▼" in art and "iron-gear-wheel" in art
 
 
-@pytest.mark.parametrize("name", ["green-circuits", "red-science"])
+@pytest.mark.parametrize("name", ["green-circuits", "red-science", "mining-ore", "smelting-column"])
 def test_samples_build_clean_and_match_committed_output(name):
     built = project.build(name, write=False)
     assert not built.issues
