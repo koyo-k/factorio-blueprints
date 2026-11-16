@@ -1,0 +1,18 @@
+[[target]]
+item = "automation-science-pack"
+per_minute = 36
+tolerance = 0.05
+
+[sim]
+warmup_ticks = 3600
+measure_ticks = 14400
+
+[[sim.input]]
+kind = "belt"
+position = [0, 0]
+left = "iron-plate"
+right = "copper-plate"
+
+[[sim.output]]
+kind = "belt"
+position = [22, 6]

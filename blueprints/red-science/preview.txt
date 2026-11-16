@@ -1,0 +1,22 @@
+# Red science
+# x = -1..23, y = -1..7 (tile coordinates; north is up)
+    0         1         2   
+   1012345678901234567890123
+-1 .........................
+ 0 .→→→→→→→→→→→→→→→→→→→→→→→.
+ 1 ..▼.+.▼.+.▼...▼.+.▼.+.▼..
+ 2 .AAA.BBB.AAA.AAA.BBB.AAA.
+ 3 .AAA◀BBB▶AAA.AAA◀BBB▶AAA.
+ 4 .AAA.BBB.AAA.AAA.BBB.AAA.
+ 5 ..▼.+...+.▼...▼.+...+.▼..
+ 6 .→→→→→→→→→→→→→→→→→→→→→→→.
+ 7 .........................
+
+legend: (! = overlapping entities)
+  → belt (arrow = travel direction)
+  ▼ inserter, arrow = the way items move (reach 1)
+  ◀ inserter, arrow = the way items move (reach 1)
+  ▶ inserter, arrow = the way items move (reach 1)
+  + electric-pole
+  A assembling-machine-2 [automation-science-pack]  3x3  x4
+  B assembling-machine-2 [iron-gear-wheel]  3x3  x2
