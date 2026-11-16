@@ -1,0 +1,21 @@
+# What this blueprint must deliver, and how `fbp sim` feeds and drains it.
+# Positions are blueprint TILE coordinates (same as preview.txt).
+
+[[target]]
+item = "electronic-circuit"
+per_minute = 140
+tolerance = 0.05
+
+[sim]
+warmup_ticks = 3600     # 1 minute to fill buffers before measuring
+measure_ticks = 14400   # 4 minutes
+
+[[sim.input]]
+kind = "belt"
+position = [0, 0]       # first tile of the input belt
+left = "iron-plate"
+right = "copper-plate"
+
+[[sim.output]]
+kind = "belt"
+position = [27, 6]      # last tile of the output belt

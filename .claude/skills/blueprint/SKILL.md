@@ -1,0 +1,58 @@
+---
+name: blueprint
+description: Factorio の生産ライン Blueprint を新規作成・修正する手順。blueprints/ 以下を作る・直す・目標レートを変えるときに使う。
+---
+
+# 生産ライン Blueprint の作り方
+
+各段階で前の段階の出力を根拠にする。数値は必ずコマンドで引く。
+
+## 1. 要件を決める
+生産物・毎分数・入力の形（ベルトのどのレーンに何が来るか／チェスト／パイプ）・使ってよい機械の段階
+（組立機2 か 3 か、モジュールの有無）。指定がなければ組立機2・モジュールなし・黄ベルトを仮定し、その仮定を報告に書く。
+
+## 2. 比率を計算する
+```bash
+uv run fbp rates <item> <毎分> --stop-at iron-plate --stop-at copper-plate
+uv run fbp recipe <item>      # 原料・時間・作れる機械
+uv run fbp entity <machine>   # 寸法・流体ポート・モジュール枠
+```
+台数は「レシピ比率」と「インサータの搬送量」の厳しい方で決まる。インサータ1本で足りない受け渡しは、
+本数を増やす・高速／バルクにする・機械を分ける、のいずれかで設計する。
+
+## 3. 配置を決める
+1ユニット（繰り返し単位）を方眼で考え、`UNITS` 回並べる形にする。build.py 冒頭の docstring に
+行ごとの役割（y=0 入力ベルト…）を書く。電柱の給電範囲と配線距離は `fbp entity <pole>` で確認。
+
+## 4. build.py と spec.toml を書く
+`blueprints/green-circuits/` をコピーして始める。`fbp.kit` を使う:
+`kit.new` / `kit.belt` / `kit.underground` / `kit.inserter(moves=...)` / `kit.machine(modules=...)` / `kit.finalize`。
+kit にない物は draftsman を直接使う: `bp.entities.append("名前", tile_position=(x, y), direction=E, ...)`。
+
+spec.toml の `[[sim.input]]` / `[[sim.output]]` の position は、プレビューと同じタイル座標で
+**Blueprint 内に実在するエンティティ**（入力ベルトの始点、出力ベルトの終点、チェスト、パイプ）を指す。
+
+## 5. ビルドして図を読む
+```bash
+uv run fbp build <name>
+```
+error を全部直す。次に出力された ASCII 図で、入力から出力まで物の流れを1本ずつ指でたどる
+（ベルトの矢印、インサータの矢印＝物の動く向き、機械の文字と凡例のレシピ）。
+
+## 6. 実機で測る
+```bash
+uv run fbp sim <name>
+```
+- `FAIL <item>` : 実測が目標未満。`utilisation` を見て原因を特定する。
+  - 機械が `item_ingredient_shortage` → その機械への供給（上流のインサータ／ベルト／前段の機械）が不足。
+  - 機械が `full_output` → 下流（取り出しインサータ／出力ベルト）が詰まり。目標達成済みなら単に余力。
+  - `fluid_ingredient_shortage` / `no_power` / `no_fuel` → 配管・電柱・燃料（`[sim] fuel = "coal"`）。
+- `never worked` : その機械・インサータは一度も動いていない。配置か向きの誤り。
+- 入力ベルトを絞って試すときは input に `per_minute = <数>` を付ける。
+
+直すのは build.py。直したら 5 に戻る。
+
+## 7. 仕上げ
+spec.toml の `per_minute` を実測で確認できた値（少し余裕を見た値）にし、`uv run pytest -q` を通して、
+build.py・spec.toml・生成物（blueprint.txt / preview.txt / preview.png）をまとめてコミットする。
+報告には、目標・実測値・仮定（機械段階、研究ボーナスの有無）・残っているボトルネックを書く。
